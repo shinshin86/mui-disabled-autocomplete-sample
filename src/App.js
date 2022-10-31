@@ -3,12 +3,12 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/system';
 import './App.css';
 
-const useStyles = makeStyles({
-  disabled: {
-      cursor: 'not-allowed !important'
+const CustomAutocomplete = styled(Autocomplete)({
+  ".Mui-disabled": {
+    cursor: 'not-allowed !important'
   }
 })
 
@@ -16,12 +16,10 @@ function App() {
   const [isDisabled, setIsDisabled ] = useState(false);
   const variant = isDisabled ? "outlined" : "contained";
 
-  const classes = useStyles();
-
   return (
       <div className="App">
         <Stack spacing={3} sx={{ width: 500 }}>
-          <Autocomplete
+          <CustomAutocomplete
             multiple
             id="tags-outlined"
             options={top100Films}
@@ -29,12 +27,6 @@ function App() {
             defaultValue={[top100Films[13]]}
             filterSelectedOptions
             disabled={isDisabled}
-            classes={
-              isDisabled ? {
-              root: classes.disabled,
-              input: classes.disabled,
-              inputRoot: classes.disabled,
-            } : {}}
             renderInput={(params) => (
               <TextField
                 {...params}
